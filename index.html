@@ -3,48 +3,25 @@
     <head>
         <meta charset="utf-8">
         <title>聊天室</title>
-        <script src="/socket.io/socket.io.js"></script>
     </head>
     <body>
-        <button id="id-login" name="button">登录</button>
-        <button id="id-logout" name="button">登出</button>
-        <button id="id-send-message" name="button">发送消息</button>
-        <br>
-        <textarea id="my-textarea"></textarea>
+        <div id="id-container">
+            <aside id="id-users">
+            </aside>
+            <main id="id-dialog">
+            </main>
+            <section id="id-input">
+                <div class="username">
+                </div>
+                <div class="controls">
+                    <button type="button" name="button">发送信息</button>
+                    <button type="button" name="button">添加文件</button>
+                </div>
+                <textarea placeholder="请输入信息"></textarea>
+            </section>
+        </div>
 
-        <script type="text/javascript">
-            var logIn = function() {
-                var logIn = document.querySelector('#id-login')
-                logIn.addEventListener('click', function() {
-                    var socket = io.connect()
-                    socket.on('connect', function() {
-                        console.log('链接成功')
-                    })
-                    socket.on('whoAreYou', () => {
-                        var name = prompt("输入你得名字", "")
-                        socket.emit('name', name)
-                    })
-                    socket.on('message', function(msg) {
-                        console.log(msg)
-                    })
-                    sendMsg(socket)
-                    logOut(socket)
-                })
-            }
-            var sendMsg = function(socket) {
-                var sendBtn = document.querySelector('#id-send-message')
-                sendBtn.addEventListener('click', function() {
-                    var msg = document.querySelector('#my-textarea').value
-                    socket.emit('message', msg)
-                })
-            }
-            var logOut = function(socket) {
-                var logOut = document.querySelector('#id-logout')
-                logOut.addEventListener('click', function() {
-                    socket.disconnect()
-                })
-            }
-            logIn()
-        </script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="main.js"></script>
     </body>
 </html>

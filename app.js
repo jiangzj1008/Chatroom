@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+app.use(express.static('static'))
+
 var server = app.listen(9000, function() {
     var host = server.address().address
     var port = server.address().port
@@ -28,7 +30,7 @@ io = require('socket.io').listen(server)
 io.on('connection', function(socket) {
     console.log('新用户连接成功')
     socket.emit('whoAreYou')
-    socket.on('name', function(name) {
+    socket.on('newUser', function(name) {
         console.log(name)
         userList.push(name)
         socket.name = name
