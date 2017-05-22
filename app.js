@@ -29,13 +29,13 @@ var userList = []
 io = require('socket.io').listen(server)
 io.on('connection', function(socket) {
     console.log('新用户连接成功')
-    socket.emit('whoAreYou')
     socket.on('newUser', function(name) {
         console.log(name)
         userList.push(name)
         socket.name = name
+        var logInTip = `${name}`
+        socket.emit('tips', logInTip)
     })
-    socket.emit('message', '你登陆了')
     socket.on('message', function(msg) {
         console.log(`收到了：${msg}`)
         var user = socket.name
