@@ -3,22 +3,25 @@
     <head>
         <meta charset="utf-8">
         <title>聊天室</title>
+        <link rel="stylesheet" href="main.css">
     </head>
     <body>
         <div id="id-container">
             <aside id="id-users">
             </aside>
             <main id="id-dialog">
+                <section class="output">
+                </section>
+                <section class="input">
+                    <div class="input-control">
+                        <div class="username">
+                        </div>
+                        <button class='btn-send' type="button" name="button">发送信息</button>
+                        <button type="button" name="button">添加文件</button>
+                    </div>
+                    <textarea class='input-area' placeholder="请输入信息"></textarea>
+                </section>
             </main>
-            <section id="id-input">
-                <div class="username">
-                </div>
-                <div class="controls">
-                    <button class='btn-send' type="button" name="button">发送信息</button>
-                    <button type="button" name="button">添加文件</button>
-                </div>
-                <textarea class='input-area' placeholder="请输入信息"></textarea>
-            </section>
         </div>
 
         <script src="/socket.io/socket.io.js"></script>

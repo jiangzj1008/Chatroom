@@ -33,8 +33,7 @@ io.on('connection', function(socket) {
         console.log(name)
         userList.push(name)
         socket.name = name
-        var logInTip = `${name}`
-        socket.emit('tips', logInTip)
+        io.sockets.emit('users', userList)
     })
     socket.on('message', function(msg) {
         console.log(`收到了：${msg}`)

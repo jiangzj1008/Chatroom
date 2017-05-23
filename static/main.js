@@ -5,9 +5,8 @@ var init = function() {
     var socket = io.connect()
     socket.on('connect', function() {
         socket.emit('newUser', name)
-        socket.on('tips', function(tip) {
-            console.log(tip)
-            addUser(tip)
+        socket.on('users', function(userList) {
+            addUser(userList)
         })
         socket.on('message', function(msg) {
             outputMsg(msg)
@@ -31,13 +30,23 @@ var init = function() {
 
     var outputMsg = function(msg) {
         var newMsg = templateMsg(msg)
-        var dialog = document.querySelector('#id-dialog')
-        dialog.innerHTML += newMsg
+        var output = document.querySelector('.output')
+        output.innerHTML += newMsg
     }
 
-    var addUser = function(name) {
+    var templateUser = function(name) {
+        var temp = `<div>${name}</div>`
+        return temp
+    }
+
+    var addUser = function(userList) {
         var list = document.querySelector('#id-users')
-        list.innerHTML += name
+        list.innerHTML = ''
+        for (var i = 0; i < userList.length; i++) {
+            var user = userList[i]
+            var newUser = templateUser(user)
+            list.innerHTML += newUser
+        }
     }
 
     bindSendBtn(socket)

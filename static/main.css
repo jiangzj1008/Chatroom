@@ -1,0 +1,43 @@
+html {
+    height: 100%;
+}
+body {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+#id-container {
+    display: flex;
+    height: 100%;
+    max-width: 800px;
+    margin: 0px auto;
+}
+
+#id-users {
+    flex: 1;
+    border-right: 1px solid black;
+}
+
+#id-dialog {
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+}
+.output {
+    flex: 8;
+}
+.input {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid black;
+}
+.input-control {
+    flex: 1;
+}
+.input-area {
+    flex: auto;
+    width: 100%;
+}
