@@ -38,6 +38,23 @@ body {
     padding: 10px;
     border-radius: 5px;
 }
+.output-mine {
+    text-align: right;
+}
+.output-user {
+    margin: 5px 0px;
+    color: grey;
+}
+.output-msg {
+    display: inline-block;
+    max-width: 200px;
+    margin: 5px 0px;
+    color: black;
+    font-size: 24px;
+    padding: 5px;
+    border: 1px solid #C1CDDA;
+    border-radius: 5px;
+}
 .input {
     flex: 2;
     display: flex;

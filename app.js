@@ -38,8 +38,8 @@ io.on('connection', function(socket) {
     socket.on('message', function(msg) {
         console.log(`收到了：${msg}`)
         var user = socket.name
-        var msg = `${user}: ${msg}`
-        io.sockets.emit('message', msg)
+        var message = [user, msg]
+        socket.broadcast.emit('message', message)
     })
     socket.on('disconnect', () => {
         console.log('有人离开了')

@@ -1,6 +1,6 @@
 var init = function() {
-    // var name = prompt("输入你的名字", "")
-    var name = 'jiangzj'
+    var name = prompt("输入你的名字", "")
+    // var name = 'jiangzj'
 
     // 链接服务器
     var socket = io.connect()
@@ -19,13 +19,21 @@ var init = function() {
         sendBtn.addEventListener('click', function() {
             var testarea = document.querySelector('.input-area')
             var msg = testarea.value
+            outputMyMsg(msg)
             socket.emit('message', msg)
             testarea.value = ''
         })
     }
 
     var templateMsg = function(msg) {
-        var temp = `<p>${msg}</p>`
+        var user = msg[0]
+        var message = msg[1]
+        var temp = `
+            <div class='output-wrap'>
+                <p class='output-user'>${user}:</p>
+                <p class='output-msg'>${message}</p>
+            </div>
+        `
         return temp
     }
 
@@ -33,6 +41,17 @@ var init = function() {
         var newMsg = templateMsg(msg)
         var output = document.querySelector('.output')
         output.innerHTML += newMsg
+    }
+
+    var outputMyMsg = function(msg) {
+        var temp = `
+            <div class='output-mine'>
+                <p class='output-user'>${name}:</p>
+                <p class='output-msg'>${msg}</p>
+            </div>
+        `
+        var output = document.querySelector('.output')
+        output.innerHTML += temp
     }
 
     var templateUser = function(name) {
