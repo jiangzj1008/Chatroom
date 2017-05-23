@@ -6,6 +6,7 @@ body {
     padding: 0px;
     height: 100%;
     width: 100%;
+    background: #eaecf1;
 }
 
 #id-container {
@@ -13,31 +14,63 @@ body {
     height: 100%;
     max-width: 800px;
     margin: 0px auto;
+    padding: 20px 0px;
+    box-sizing: border-box;
 }
 
 #id-users {
     flex: 1;
-    border-right: 1px solid black;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background: white;
 }
 
 #id-dialog {
-    flex: 4;
+    flex: 3;
     display: flex;
     flex-direction: column;
 }
 .output {
     flex: 8;
+    margin-bottom: 10px;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
 }
 .input {
     flex: 2;
     display: flex;
     flex-direction: column;
-    border-top: 1px solid black;
-}
-.input-control {
-    flex: 1;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
 }
 .input-area {
     flex: auto;
-    width: 100%;
+    resize: none;
+    outline: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.input-control {
+    flex: 1;
+    float: right;
+}
+.btn {
+    float: right;
+    padding: 10px;
+    margin-left: 5px;
+    background: white;
+    border: 1px solid #C1CDDA;
+    border-radius: 5px;
+    outline: none;
+    transition: all 0.3s;
+}
+.btn:hover {
+    color: #20A0FF;
+    border: 1px solid #20A0FF;
 }

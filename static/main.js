@@ -1,5 +1,6 @@
 var init = function() {
-    var name = prompt("输入你的名字", "")
+    // var name = prompt("输入你的名字", "")
+    var name = 'jiangzj'
 
     // 链接服务器
     var socket = io.connect()
