@@ -1,16 +1,27 @@
 var init = function() {
     var name = prompt("输入你的名字", "")
     // var name = 'jiangzj'
-
+    var users = []
     // 链接服务器
     var socket = io.connect()
     socket.on('connect', function() {
         socket.emit('newUser', name)
         socket.on('users', function(userList) {
-            addUser(userList)
+            users = userList
+            showUser(users)
         })
         socket.on('message', function(msg) {
             outputMsg(msg)
+        })
+        socket.on('logOut', function(name) {
+            var temp = `
+                <div class='output-logout'>
+                    <p>${name} 离开了</p>
+                </div>
+            `
+            var output = document.querySelector('.output')
+            output.innerHTML += temp
+            removeUser(name)
         })
     })
 
@@ -29,7 +40,7 @@ var init = function() {
         var user = msg[0]
         var message = msg[1]
         var temp = `
-            <div class='output-wrap'>
+            <div class='output-others'>
                 <p class='output-user'>${user}:</p>
                 <p class='output-msg'>${message}</p>
             </div>
@@ -59,7 +70,7 @@ var init = function() {
         return temp
     }
 
-    var addUser = function(userList) {
+    var showUser = function(userList) {
         var list = document.querySelector('#id-users')
         list.innerHTML = ''
         for (var i = 0; i < userList.length; i++) {
@@ -69,13 +80,12 @@ var init = function() {
         }
     }
 
+    var removeUser = function(user) {
+        users.splice(users.indexOf(user), 1)
+        showUser(users)
+    }
+
     bindSendBtn(socket)
 }
 
-var logOut = function(socket) {
-    var logOut = document.querySelector('#id-logout')
-    logOut.addEventListener('click', function() {
-        socket.disconnect()
-    })
-}
 init()

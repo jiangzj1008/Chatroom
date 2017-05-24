@@ -43,7 +43,8 @@ io.on('connection', function(socket) {
     })
     socket.on('disconnect', () => {
         console.log('有人离开了')
-        userList.splice(userList.indexOf(socket.name), 1)
-        socket.broadcast.emit('message', `${socket.name} 已经离开`)
+        var name = socket.name
+        userList.splice(userList.indexOf(name), 1)
+        socket.broadcast.emit('logOut', name)
     })
 })

@@ -55,6 +55,9 @@ body {
     border: 1px solid #C1CDDA;
     border-radius: 5px;
 }
+.output-logout {
+    text-align: center;
+}
 .input {
     flex: 2;
     display: flex;
