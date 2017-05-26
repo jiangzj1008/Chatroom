@@ -85,7 +85,27 @@ var init = function() {
         showUser(users)
     }
 
+    var sendPic = function() {
+        var input = document.querySelector('.input-area')
+        input.addEventListener('drop', function(e) {
+            e.preventDefault()
+            var fileList = e.dataTransfer.files
+            var i = fileList[0].type.indexOf('image')
+            if (fileList.length != 0) {
+                if (i != -1) {
+                    var src = window.URL.createObjectURL(fileList[0])
+                    var filename = fileList[0].name
+                    var filesize = Math.floor((fileList[0].size)/1024)
+
+                }
+            } else {
+                console.log(2);
+            }
+        })
+    }
+
     bindSendBtn(socket)
+    sendPic()
 }
 
 init()
