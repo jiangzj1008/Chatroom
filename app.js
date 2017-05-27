@@ -47,4 +47,9 @@ io.on('connection', function(socket) {
         userList.splice(userList.indexOf(name), 1)
         socket.broadcast.emit('logOut', name)
     })
+    socket.on('newImg', function(img) {
+        var user = socket.name
+        var message = [user, img]
+        io.sockets.emit('newImg', message)
+    })
 })

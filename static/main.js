@@ -13,6 +13,9 @@ var init = function() {
         socket.on('message', function(msg) {
             outputMsg(msg)
         })
+        socket.on('newImg', function(msg) {
+            // outputImg(msg)
+        })
         socket.on('logOut', function(name) {
             var temp = `
                 <div class='output-logout'>
@@ -65,6 +68,17 @@ var init = function() {
         output.innerHTML += temp
     }
 
+    var outputImg = function(msg) {
+        var src = img.src
+        var name = img.name
+        var time = img.time
+        console.log(name);
+        var temp = `
+            <div class='output-img'>
+                <img src='$'>
+        `
+    }
+
     var templateUser = function(name) {
         var temp = `<div>${name}</div>`
         return temp
@@ -85,7 +99,8 @@ var init = function() {
         showUser(users)
     }
 
-    var sendPic = function() {
+    var img = undefined
+    var dragPic = function() {
         var input = document.querySelector('.input-area')
         input.addEventListener('drop', function(e) {
             e.preventDefault()
@@ -94,18 +109,40 @@ var init = function() {
             if (fileList.length != 0) {
                 if (i != -1) {
                     var src = window.URL.createObjectURL(fileList[0])
-                    var filename = fileList[0].name
+                    // var filename = fileList[0].name
                     var filesize = Math.floor((fileList[0].size)/1024)
-
+                    var temp = `
+                        <img src='${src}' alt='图片'>
+                    `
+                    var preview = document.querySelector('.input-img')
+                    preview.innerHTML = temp
+                    var reader = new FileReader()
+                    reader.readAsDataURL(fileList[0])
+                    reader.onload = function() {
+                        img = this.result
+                    }
                 }
             } else {
-                console.log(2);
+                console.log('error');
             }
         })
     }
 
+    var sendPic = function() {
+        socket.emit('newImg', img)
+        img = undefined
+        var preview = document.querySelector('.input-img')
+        preview.innerHTML = ''
+    }
+
+    var bindSendPic = function() {
+        var btn = document.querySelector('.btn-pic')
+        btn.addEventListener('click', sendPic)
+    }
+
     bindSendBtn(socket)
-    sendPic()
+    dragPic()
+    bindSendPic()
 }
 
 init()
