@@ -50,6 +50,6 @@ io.on('connection', function(socket) {
     socket.on('newImg', function(img) {
         var user = socket.name
         var message = [user, img]
-        io.sockets.emit('newImg', message)
+        socket.broadcast.emit('newImg', message)
     })
 })

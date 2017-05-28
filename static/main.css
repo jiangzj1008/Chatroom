@@ -55,6 +55,14 @@ body {
     border: 1px solid #C1CDDA;
     border-radius: 5px;
 }
+.output-img {
+    max-width: 200px;
+    display: inline-block;
+    margin: 5px 0px;
+    padding: 5px;
+    border: 1px solid #C1CDDA;
+    border-radius: 5px;
+}
 .output-logout {
     text-align: center;
 }

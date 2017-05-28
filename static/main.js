@@ -14,7 +14,7 @@ var init = function() {
             outputMsg(msg)
         })
         socket.on('newImg', function(msg) {
-            // outputImg(msg)
+            outputImg(msg)
         })
         socket.on('logOut', function(name) {
             var temp = `
@@ -69,14 +69,27 @@ var init = function() {
     }
 
     var outputImg = function(msg) {
-        var src = img.src
-        var name = img.name
-        var time = img.time
-        console.log(name);
+        var src = msg[1]
+        var name = msg[0]
         var temp = `
-            <div class='output-img'>
-                <img src='$'>
+            <div class='output-others'>
+                <p class='output-user'>${name}:</p>
+                <img class='output-img' src='${src}' alt=''>
+            </div>
         `
+        var output = document.querySelector('.output')
+        output.innerHTML += temp
+    }
+
+    var outputMyImg = function(img) {
+        var temp = `
+            <div class='output-mine'>
+                <p class='output-user'>${name}:</p>
+                <img class='output-img' src='${img}' alt=''>
+            </div>
+        `
+        var output = document.querySelector('.output')
+        output.innerHTML += temp
     }
 
     var templateUser = function(name) {
@@ -130,6 +143,7 @@ var init = function() {
 
     var sendPic = function() {
         socket.emit('newImg', img)
+        outputMyImg(img)
         img = undefined
         var preview = document.querySelector('.input-img')
         preview.innerHTML = ''
