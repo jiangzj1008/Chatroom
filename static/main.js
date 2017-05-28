@@ -13,7 +13,7 @@ var init = function() {
         socket.on('message', function(msg) {
             outputMsg(msg)
         })
-        socket.on('newImg', function(msg) {
+        socket.on('image', function(msg) {
             outputImg(msg)
         })
         socket.on('logOut', function(name) {
@@ -142,7 +142,7 @@ var init = function() {
     }
 
     var sendPic = function() {
-        socket.emit('newImg', img)
+        socket.emit('image', img)
         outputMyImg(img)
         img = undefined
         var preview = document.querySelector('.input-img')
