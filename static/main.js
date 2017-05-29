@@ -33,9 +33,11 @@ var init = function() {
         sendBtn.addEventListener('click', function() {
             var testarea = document.querySelector('.input-area')
             var msg = testarea.value
-            outputMyMsg(msg)
-            socket.emit('message', msg)
-            testarea.value = ''
+            if (msg != '') {
+                outputMyMsg(msg)
+                socket.emit('message', msg)
+                testarea.value = ''
+            }
         })
     }
 
@@ -122,7 +124,6 @@ var init = function() {
             if (fileList.length != 0) {
                 if (i != -1) {
                     var src = window.URL.createObjectURL(fileList[0])
-                    // var filename = fileList[0].name
                     var filesize = Math.floor((fileList[0].size)/1024)
                     var temp = `
                         <img src='${src}' alt='图片'>
@@ -154,9 +155,27 @@ var init = function() {
         btn.addEventListener('click', sendPic)
     }
 
+    var bindEnter = function() {
+        var text = document.querySelector('.input-area')
+        text.onkeydown = function(e) {
+            var num = e.keyCode
+            e.preventDefault()
+            if (num == 13) {
+                var testarea = document.querySelector('.input-area')
+                var msg = testarea.value
+                if (msg != '') {
+                    outputMyMsg(msg)
+                    socket.emit('message', msg)
+                    testarea.value = ''
+                }
+            }
+        }
+    }
+
     bindSendBtn(socket)
     dragPic()
     bindSendPic()
+    bindEnter()
 }
 
 init()
