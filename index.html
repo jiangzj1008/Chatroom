@@ -13,16 +13,17 @@
                 <section class="output">
                 </section>
                 <section class="input">
-                    <textarea class='input-area'></textarea>
+                    <textarea v-on:drop="dropPic" v-on:keydown="enter" class='input-area'></textarea>
                     <div class="input-img"></div>
                     <div class="input-control">
-                        <button class='btn btn-send' type="button" name="button">发送信息</button>
-                        <button class='btn btn-pic' type="button" name="button">发送图片</button>
+                        <button v-on:click="sendMsg" class='btn btn-send' type="button" name="button">发送信息</button>
+                        <button v-on:click="sendPic" class='btn btn-pic' type="button" name="button">发送图片</button>
                     </div>
                 </section>
             </main>
         </div>
 
+        <script src="https://unpkg.com/vue/dist/vue.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script src="main.js"></script>
     </body>

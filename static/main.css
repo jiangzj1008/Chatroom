@@ -37,6 +37,7 @@ body {
     background: white;
     padding: 10px;
     border-radius: 5px;
+    overflow: auto;
 }
 .output-mine {
     text-align: right;
