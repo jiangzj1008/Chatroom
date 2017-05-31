@@ -101,21 +101,31 @@ var init = function() {
                 var output = document.querySelector('.output')
                 output.innerHTML += temp
             },
+            isAllBlank: function(msg) {
+                for (var i = 0; i < msg.length; i++) {
+                    if (msg[i] != ' ') {
+                        return false
+                    }
+                    return true
+                }
+            },
             sendMsg: function() {
                 var testarea = document.querySelector('.input-area')
                 var msg = testarea.value
-                if (msg != '') {
+                if (app.isAllBlank(msg)) {
+                    return
+                } else {
                     app.outputMyMsg(msg)
                     socket.emit('message', msg)
-                    testarea.value = ''
                 }
+                testarea.value = ''
             },
 
             // 其他
             enter: function(e) {
-                e.preventDefault()
                 var num = e.code
                 if (num == 'Enter') {
+                    e.preventDefault()
                     app.sendMsg()
                 }
             },
