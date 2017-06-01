@@ -55,7 +55,9 @@ var init = function() {
                 var temp = `
                     <div class='output-others'>
                         <p class='output-user'>${name}:</p>
-                        <img class='output-img' src='${src}' alt=''>
+                        <a href="${src}" target="blank">
+                            <img class='output-img' src='${src}' alt=''>
+                        </a>
                     </div>
                 `
                 var output = document.querySelector('.output')
@@ -65,7 +67,9 @@ var init = function() {
                 var temp = `
                     <div class='output-mine'>
                         <p class='output-user'>${name}:</p>
-                        <img class='output-img' src='${img}' alt=''>
+                        <a href="${img}" target="_blank">
+                            <img class='output-img' src='${img}' alt=''>
+                        </a>
                     </div>
                 `
                 var output = document.querySelector('.output')
