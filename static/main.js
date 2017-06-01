@@ -31,13 +31,14 @@ var init = function() {
                 var i = fileList[0].type.indexOf('image')
                 if (fileList.length != 0) {
                     if (i != -1) {
+                        // 图片预览
                         var src = window.URL.createObjectURL(fileList[0])
-                        var filesize = Math.floor((fileList[0].size)/1024)
                         var temp = `
                             <img src='${src}' alt='图片'>
                         `
                         var preview = document.querySelector('.input-img')
                         preview.innerHTML = temp
+                        // 读取图片数据
                         var reader = new FileReader()
                         reader.readAsDataURL(fileList[0])
                         reader.onload = function() {
@@ -129,6 +130,15 @@ var init = function() {
                     app.sendMsg()
                 }
             },
+            login: function(name) {
+                var temp = `
+                    <div class='output-login'>
+                        <p>${name} 加入了</p>
+                    </div>
+                `
+                var output = document.querySelector('.output')
+                output.innerHTML += temp
+            },
             logout: function(name) {
                 var temp = `
                     <div class='output-logout'>
@@ -151,9 +161,10 @@ var init = function() {
     var socket = io.connect()
     socket.on('connect', function() {
         socket.emit('newUser', name)
-        socket.on('users', function(userList) {
+        socket.on('logIn', function(userList,name) {
             users = userList
             app.showUser(users)
+            app.login(name)
         })
         socket.on('message', function(msg) {
             app.outputMsg(msg)

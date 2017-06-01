@@ -33,7 +33,7 @@ io.on('connection', function(socket) {
         console.log(name)
         userList.push(name)
         socket.name = name
-        io.sockets.emit('users', userList)
+        io.sockets.emit('logIn', userList, name)
     })
     socket.on('message', function(msg) {
         console.log(`收到了：${msg}`)
