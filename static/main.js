@@ -62,6 +62,7 @@ var init = function() {
                 `
                 var output = document.querySelector('.output')
                 output.innerHTML += temp
+                scrollBottom()
             },
             outputMyImg: function(img) {
                 var temp = `
@@ -74,13 +75,16 @@ var init = function() {
                 `
                 var output = document.querySelector('.output')
                 output.innerHTML += temp
+                scrollBottom()
             },
-            sendPic: function() {
-                socket.emit('image', img)
-                app.outputMyImg(img)
-                img = undefined
-                var preview = document.querySelector('.input-img')
-                preview.innerHTML = ''
+            sendImg: function() {
+                if (img != undefined) {
+                    socket.emit('image', img)
+                    app.outputMyImg(img)
+                    img = undefined
+                    var preview = document.querySelector('.input-img')
+                    preview.innerHTML = ''
+                }
             },
 
             // 文字信息相关
@@ -95,6 +99,7 @@ var init = function() {
                 `
                 var output = document.querySelector('.output')
                 output.innerHTML += temp
+                scrollBottom()
             },
             outputMyMsg: function(msg) {
                 var temp = `
@@ -105,21 +110,12 @@ var init = function() {
                 `
                 var output = document.querySelector('.output')
                 output.innerHTML += temp
-            },
-            isAllBlank: function(msg) {
-                for (var i = 0; i < msg.length; i++) {
-                    if (msg[i] != ' ') {
-                        return false
-                    }
-                    return true
-                }
+                scrollBottom()
             },
             sendMsg: function() {
                 var testarea = document.querySelector('.input-area')
                 var msg = testarea.value
-                if (app.isAllBlank(msg)) {
-                    return
-                } else {
+                if (msg.trim().length != 0) {
                     app.outputMyMsg(msg)
                     socket.emit('message', msg)
                 }
@@ -132,6 +128,7 @@ var init = function() {
                 if (num == 'Enter') {
                     e.preventDefault()
                     app.sendMsg()
+                    app.sendImg()
                 }
             },
             login: function(name) {
@@ -160,6 +157,13 @@ var init = function() {
     var img = undefined
     var name = prompt("输入你的名字", "")
     var users = []
+
+    // 原生事件
+    var scrollBottom = function() {
+        var output = document.querySelector('.output')
+        var st = output.scrollHeight
+        output.scrollTop = st
+    }
 
     // socket事件
     var socket = io.connect()
