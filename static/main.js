@@ -123,12 +123,17 @@ var init = function() {
             },
 
             // 其他
-            enter: function(e) {
-                var num = e.code
-                if (num == 'Enter') {
+            keyEvt: function(e) {
+                var code = e.code
+                if (code == 'Enter') {
                     e.preventDefault()
                     app.sendMsg()
                     app.sendImg()
+                }
+                if (code == 'Backspace') {
+                    var preview = document.querySelector('.input-img')
+                    preview.innerHTML = ''
+                    img = undefined
                 }
             },
             login: function(name) {

@@ -12,7 +12,7 @@
             <main id="id-dialog">
                 <section class="output"></section>
                 <section class="input">
-                    <textarea v-on:drop="dropPic" v-on:keydown="enter" class='input-area'></textarea>
+                    <textarea v-on:drop="dropPic" v-on:keydown="keyEvt" class='input-area'></textarea>
                     <div class="input-img"></div>
                     <div class="input-control">
                         <button v-on:click="sendMsg" class='btn btn-send' type="button" name="button">发送信息</button>
