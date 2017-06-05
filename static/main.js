@@ -62,7 +62,7 @@ var init = function() {
                 `
                 var output = document.querySelector('.output')
                 output.innerHTML += temp
-                scrollBottom()
+                app.scrollBottom()
             },
             outputMyImg: function(img) {
                 var temp = `
@@ -75,7 +75,7 @@ var init = function() {
                 `
                 var output = document.querySelector('.output')
                 output.innerHTML += temp
-                scrollBottom()
+                app.scrollBottom()
             },
             sendImg: function() {
                 if (img != undefined) {
@@ -99,7 +99,7 @@ var init = function() {
                 `
                 var output = document.querySelector('.output')
                 output.innerHTML += temp
-                scrollBottom()
+                app.scrollBottom()
             },
             outputMyMsg: function(msg) {
                 var temp = `
@@ -110,7 +110,7 @@ var init = function() {
                 `
                 var output = document.querySelector('.output')
                 output.innerHTML += temp
-                scrollBottom()
+                app.scrollBottom()
             },
             sendMsg: function() {
                 var testarea = document.querySelector('.input-area')
@@ -135,6 +135,11 @@ var init = function() {
                     preview.innerHTML = ''
                     img = undefined
                 }
+            },
+            scrollBottom: function() {
+                var output = document.querySelector('.output')
+                var st = output.scrollHeight
+                output.scrollTop = st
             },
             login: function(name) {
                 var temp = `
@@ -162,13 +167,6 @@ var init = function() {
     var img = undefined
     var name = prompt("输入你的名字", "")
     var users = []
-
-    // 原生事件
-    var scrollBottom = function() {
-        var output = document.querySelector('.output')
-        var st = output.scrollHeight
-        output.scrollTop = st
-    }
 
     // socket事件
     var socket = io.connect()

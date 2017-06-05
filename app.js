@@ -3,7 +3,7 @@ const app = express();
 
 app.use(express.static('static'))
 
-var server = app.listen(9000, function() {
+var server = app.listen(80, function() {
     var host = server.address().address
     var port = server.address().port
     console.log("应用实例，访问地址为 http://%s:%s", host, port)
@@ -28,7 +28,6 @@ var userList = []
 
 io = require('socket.io').listen(server)
 io.on('connection', function(socket) {
-    console.log('新用户连接成功')
     socket.on('newUser', function(name) {
         console.log(name)
         userList.push(name)
