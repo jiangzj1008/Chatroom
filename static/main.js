@@ -2,26 +2,12 @@ var init = function() {
     var app = new Vue({
         el: '#id-container',
         data: {
-            message: ''
+            users: []
         },
         methods: {
             // 用户名相关
-            templateUser: function(name) {
-                var temp = `<div>${name}</div>`
-                return temp
-            },
-            showUser: function(userList) {
-                var list = document.querySelector('#id-users')
-                list.innerHTML = ''
-                for (var i = 0; i < userList.length; i++) {
-                    var user = userList[i]
-                    var newUser = app.templateUser(user)
-                    list.innerHTML += newUser
-                }
-            },
             removeUser: function(name) {
-                users.splice(users.indexOf(name), 1)
-                app.showUser(users)
+                this.users.splice(this.users.indexOf(name), 1)
             },
 
             // 图片相关
@@ -166,15 +152,17 @@ var init = function() {
     // 全局变量
     var img = undefined
     var name = prompt("输入你的名字", "")
-    var users = []
 
     // socket事件
     var socket = io.connect()
     socket.on('connect', function() {
         socket.emit('newUser', name)
         socket.on('logIn', function(userList,name) {
-            users = userList
-            app.showUser(users)
+            if (app.users.length == 0) {
+                app.users = userList
+            } else {
+                app.users.push(name)
+            }
             app.login(name)
         })
         socket.on('message', function(msg) {
